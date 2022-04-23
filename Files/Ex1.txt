@@ -1,0 +1,74 @@
+gyc6001:~/workspace $ cd Intro-to-Programming
+gyc6001:~/workspace/Intro-to-Programming (master) $ cd Files
+gyc6001:~/workspace/Intro-to-Programming/Files (master) $ irb
+2.3.0 :001 > File.new("simple_file.txt")
+Errno::ENOENT: No such file or directory @ rb_sysopen - simple_file.txt
+        from (irb):1:in `initialize'
+        from (irb):1:in `new'
+        from (irb):1
+        from /usr/local/rvm/rubies/ruby-2.3.0/bin/irb:11:in `<main>'
+2.3.0 :002 > my_file = File.new("simple_file.txt","w+")
+ => #<File:simple_file.txt> 
+2.3.0 :003 > my_file.close
+ => nil 
+2.3.0 :004 > File.open("simple_file.txt", "w") { |file| file.write("adding first line of text")}
+ => 25 
+2.3.0 :005 > File.read("simple_file.txt")
+ => "adding first line of text" 
+2.3.0 :006 > sample = File.open("simple_file.txt", "w+")
+ => #<File:simple_file.txt> 
+2.3.0 :007 > sample.puts("another exammple of writing to a file.")
+ => nil 
+2.3.0 :008 > sample.close
+ => nil 
+2.3.0 :009 > File.read("simple_file.txt")
+ => "another exammple of writing to a file.\n" 
+2.3.0 :010 > File.open("simple_file.txt","a+") do |file|
+2.3.0 :011 >     file << "Here we are with a new line of text"
+2.3.0 :012?>   end
+ => #<File:simple_file.txt (closed)> 
+2.3.0 :013 > File.readlines("simple_file.txt").each do |line|
+2.3.0 :014 >     puts line
+2.3.0 :015?>   end
+another exammple of writing to a file.
+Here we are with a new line of text
+ => ["another exammple of writing to a file.\n", "Here we are with a new line of text"] 
+2.3.0 :016 > File.open("simple_file.txt", "a+") do |file|
+2.3.0 :017 >     file.write "Writing to files in Ruby is simple."
+2.3.0 :018?>   end
+ => 35 
+2.3.0 :019 > File.readlines("simple_file.txt").each_with_index do |line, line_num|
+2.3.0 :020 >     puts "#{line_num}: #{line}"
+2.3.0 :021?>   end
+0: another exammple of writing to a file.
+1: Here we are with a new line of textWriting to files in Ruby is simple.
+ => ["another exammple of writing to a file.\n", "Here we are with a new line of textWriting to files in Ruby is simple."] 
+2.3.0 :022 > File.new("dummy_file.txt", "w+")
+ => #<File:dummy_file.txt> 
+2.3.0 :023 > File.delete("dummy_file.txt")
+ => 1 
+2.3.0 :024 > simple = File.read("simple_file.txt")
+ => "another exammple of writing to a file.\nHere we are with a new line of textWriting to files in Ruby is simple." 
+2.3.0 :025 > original = File.new("original_file.txt", "w+")
+ => #<File:original_file.txt> 
+2.3.0 :026 > File.open(original, "a") do |file|
+2.3.0 :027 >     file.puts simple
+2.3.0 :028?>   end
+ => nil 
+2.3.0 :029 > File.read(oriignal)
+NameError: undefined local variable or method `oriignal' for main:Object
+Did you mean?  original
+        from (irb):29
+        from /usr/local/rvm/rubies/ruby-2.3.0/bin/irb:11:in `<main>'
+2.3.0 :030 > File.read(original)
+ => "another exammple of writing to a file.\nHere we are with a new line of textWriting to files in Ruby is simple.\n" 
+2.3.0 :031 > require 'pathname'
+ => true 
+2.3.0 :032 > f = File.new("simple_file.txt", "r")
+ => #<File:simple_file.txt> 
+2.3.0 :033 > pn = Pathname.new(f)
+ => #<Pathname:simple_file.txt> 
+2.3.0 :034 > pn.extname
+ => ".txt" 
+2.3.0 :035 > File.extname("simple_file.txt")
+ => ".txt" 

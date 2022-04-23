@@ -1,0 +1,22 @@
+gyc6001:~/workspace $ cd Intro-to-Programming/Files
+gyc6001:~/workspace/Intro-to-Programming/Files (master) $ irb
+2.3.0 :001 > d = Dir.new(".")
+ => #<Dir:.> 
+2.3.0 :002 > while file = d.read do
+2.3.0 :003 >     puts "#{file} has extension .txt" if File.extname(file) == ".txt"
+2.3.0 :004?>   end
+simple_file.txt has extension .txt
+original_file.txt has extension .txt
+Ex1.txt has extension .txt
+ => nil 
+2.3.0 :005 > require 'pathname'
+ => true 
+2.3.0 :006 > pn = Pathname.new(".")
+ => #<Pathname:.> 
+2.3.0 :007 > pn.entries.each do |f|
+2.3.0 :008 >     puts "#{f} has extension.txt" if f.extname == ".txt"
+2.3.0 :009?>   end
+simple_file.txt has extension.txt
+original_file.txt has extension.txt
+Ex1.txt has extension.txt
+ => [#<Pathname:simple_file.txt>, #<Pathname:..>, #<Pathname:.>, #<Pathname:original_file.txt>, #<Pathname:Ex1.txt>] 
